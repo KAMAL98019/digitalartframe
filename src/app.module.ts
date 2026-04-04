@@ -25,7 +25,10 @@ import { Frames } from './frames/frames.entity';
         url: configService.get<string>('DATABASE_URL'),
         entities: [Adminuser, Categories, Frames],
         synchronize: true,
-        // ssl: { rejectUnauthorized: false },
+        ssl:
+          process.env.NODE_ENV === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
       }),
     }),
     AdminuserModule,

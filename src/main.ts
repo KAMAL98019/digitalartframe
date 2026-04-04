@@ -9,9 +9,9 @@ async function bootstrap() {
 
   // main.ts
   app.enableCors({
-    origin: 'http://localhost:3000', // your frontend URL
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true, // if you use cookies or auth headers
+    credentials: true,
     allowedHeaders: 'Content-Type, Accept, Authorization',
   });
 
@@ -38,7 +38,7 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3000;
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   console.log(`Server running on port ${port}`);
 }
 void bootstrap();
